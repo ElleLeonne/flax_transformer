@@ -33,6 +33,8 @@ class Attention(nn.Module):
     config: dict=None
 
     def setup(self):
+        """We would normally use @nn.compact here, but since the Attention class is the most important and most complicated,
+        I've found it easier to use the basic pytorch notation for debugging. Then we can do things like use if statements for initialization."""
         self.hidden_size = self.config.hidden_size
         self.num_heads = self.config.num_heads
         self.head_dim = self.hidden_size // self.num_heads
