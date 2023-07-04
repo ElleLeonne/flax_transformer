@@ -139,4 +139,5 @@ class LMHead(nn.Module):
         input_embeds = nn.Embed(self.config.vocab_size, self.config.hidden_size, self.config.dtype, name="text_embeds")(input_ids)
         hidden_state = Model(self.config)(input_embeds, attn_mask, position_ids)
         logits = nn.Dense(self.config.vocab_size, False, self.config.dtype, name="logits")(hidden_state) #Generate probability distribution over vocabulary
+        #We should find a good method for fusing embed & logit layers to free up memory.
         return logits
